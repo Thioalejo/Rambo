@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JohnMovimiento : MonoBehaviour
 {
@@ -93,18 +94,24 @@ public class JohnMovimiento : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
+
         RigidbodyD2.velocity = new Vector2(Horizontal, RigidbodyD2.velocity.y);
 
         if (isLeft)
         {
+            Horizontal = -1;
             RigidbodyD2.AddForce(new Vector2(-Speed, 0) * Time.deltaTime);
             if (Horizontal < 0.0f) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            Animator.SetBool("running", Horizontal != 0.0f);
         }
 
         if (isRight)
         {
+            Horizontal = 1;
             RigidbodyD2.AddForce(new Vector2(Speed, 0) * Time.deltaTime);
             if (Horizontal > 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            Animator.SetBool("running", Horizontal != 0.0f);
         }
 
         //con tuto del joystick
@@ -140,5 +147,4 @@ public class JohnMovimiento : MonoBehaviour
     {
         isRight = false;
     }
-
 }

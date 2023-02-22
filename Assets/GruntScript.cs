@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GruntScript : MonoBehaviour
 {
@@ -12,7 +13,12 @@ public class GruntScript : MonoBehaviour
 
     private void Update()
     {
-        if (John == null) return;
+        if (John == null)
+        {
+            SceneManager.LoadScene(0);
+            return;
+        }
+       
         Vector3 direction = John.transform.position - transform.position;
         if (direction.x >= 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         else transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
